@@ -28,7 +28,7 @@ BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,o
 SECRET_KEY = 'jdrf-kfb0l*9+fur84!ctvf2ft*=(v5liy@pm8tl38l!_11m%z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['dammideal.com','www.dammideal.com']
 
