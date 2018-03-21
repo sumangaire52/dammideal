@@ -1,0 +1,17 @@
+{% extends 'shop/base.html'%}
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+		<div class="row">
+            {% include 'shop/sidebar.html' %}
+            <div class="span9">
+                <h3>Thank you!!!</h3>
+                <p>Thank you we have received your order. Your items will be delivered with in 24 hours.<br><strong style="color: rgb(150,45,100);">Thank you for shopping with us!</strong></p>
+                <br>
+                <br>
+                <strong>Order id : {{order.id}}</strong>
+			</div>
+       </div>
+    </div>
+</div>
+{% endblock %}

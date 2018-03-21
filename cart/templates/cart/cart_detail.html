@@ -1,0 +1,63 @@
+{% extends 'shop/base.html' %}
+<!-- Header End====================================================================== -->
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+     {% include 'shop/sidebar.html' %}
+<!-- Sidebar end=============================================== -->
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="/">Home</a> <span class="divider">/</span></li>
+		<li class="active"> Cart</li>
+    </ul>
+	<h3>  SHOPPING CART [ <small>{{cart|length}} Item{{cart|length|pluralize}} </small>]<a href="/" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<hr class="soft"/>
+			
+	<table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity/Update</th>
+                  <th>Color</th>
+                  <th>Size</th>
+				  <th>Price</th>
+                  <th>Total</th>
+				</tr>
+              </thead>
+              <tbody>
+              	{% for item in cart %}
+                <tr>
+                  <td> <img width="60" src="{{item.product.image1.url}}" alt="{{item.product.name}}"/></td>
+				  <td>
+					<div class="input-append">
+						<form action="{% url 'cart:add_to_cart' item.product.id %}" method="post">
+							{% csrf_token %}
+							{{item.form_to_update_quantity.quantity}}
+							{{item.form_to_update_quantity.update}}
+							<button type="submit" class="btn">Update</button>
+						</form>
+						<a href="{% url 'cart:remove_from_cart' item.product.id %}"><button class="btn">Remove</button></a>
+					</div>
+				  </td>
+				  <td>{{item.color}}</td>
+				  <td>{{item.size}}</td>
+                  <td>Rs. {{item.price}}</td>
+                  <td>Rs. {{item.total_price}}</td>
+                {% endfor %}
+                <tr>
+                  <td colspan="5" style="text-align:right"><strong>Total Price:	</strong></td>
+                  <td class="label label-important" style="display:block"> <strong>Rs. {{cart.get_total_price}}</strong></td>
+                </tr>
+				</tbody>
+            </table>
+    <a href="/" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+	{% if cart|length > 0 %}
+	<a href="{% url 'orders:create_order' %}" class="btn btn-large pull-right">Order<i class="icon-arrow-right"></i></a>
+	{% endif %}
+</div>
+</div></div>
+</div>
+<!-- MainBody End ============================= -->
+{% endblock %}

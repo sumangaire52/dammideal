@@ -1,0 +1,22 @@
+{% extends 'shop/base.html'%}
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+		<div class="row">
+            {% include 'shop/sidebar.html' %}
+            <div class="span9">
+            <h5>Please enter the verification code you received.</h5>
+            <br>
+            {% if error_message %}
+            <small style="color:red;">{{error_message}}</small>
+            {% endif %}
+			<form action="{% url 'orders:verify' order.id %}" method="post">
+				{% csrf_token %}
+				{{verification_form.code}}
+				<button type="submit" class="btn">Verify</button>
+			</form>
+			</div>
+       </div>
+    </div>
+</div>
+{% endblock %}

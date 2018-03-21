@@ -1,0 +1,47 @@
+{% load cache %}
+{% load static %}
+<div id="sidebar" class="span3">
+		<div class="well well-small"><a id="myCart" href="{% url 'cart:cart_detail'%}"><img src="{% static 'themes/images/ico-cart.png'%}" alt="cart">{{cart|length}} Item{{cart|length|pluralize}} in your cart  <span class="badge badge-warning pull-right">Rs. {{cart.get_total_price}}</span></a></div>
+		{% cache 600 sidebar_cache %}
+		<ul id="sideManu" class="nav nav-tabs nav-stacked">
+			{% for c in categories %}
+			{% if c.subcategories.all %}
+			{% if forloop.first %}
+			<li class="subMenu open"><a>{{c.name}}</a>
+				<ul>
+				{% for s in c.subcategories.all %}	
+				<li><a class="active" href="{{s.get_absolute_url}}"><i class="icon-chevron-right"></i>{{s.name}}</a></li>
+				{% endfor %}
+				</ul>
+			</li>
+			{% else %}
+			<li class="subMenu"><a>{{c.name}}</a>
+			<ul style="display:none">
+				{% for s in c.subcategories.all %}
+				<li><a href="{{s.get_absolute_url}}"><i class="icon-chevron-right"></i>{{s.name}}</a></li>							
+				{% endfor %}
+			</ul>
+			</li>
+			{% endif %}
+			{% else %}
+			<li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+			{% endif %}
+			{% endfor %}
+		</ul>
+
+		<br/>
+		  <h4 style="text-align: center; color: black;">Top sellers</h4>
+		  <div class="thumbnail">
+			<a href="#"><img src="{% static 'themes/images/products/untitled.png' %}" alt="Lorem ipsum"/></a>
+			<div class="caption">
+			  <h5 style="color:black;">Lorem ipsum</h5>
+			</div>
+		  </div><br/>
+			<div class="thumbnail">
+				<a href="#"><img src="{% static 'themes/images/products/untitled.png' %}" title="Lorem ipsum" alt="Lorem ipsum"></a>
+				<div class="caption">
+				  <h5 style="color: black">Lorem ipsum</h5>
+				</div>
+			</div><br/>
+	</div>
+	{% endcache %}

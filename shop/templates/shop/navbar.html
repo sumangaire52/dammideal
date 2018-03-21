@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-bar w3-teal">
+  <a href="#" class="w3-bar-item w3-padding-16" style="text-decoration: none;font-weight: bolder;">Home</a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-16 w3-right">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-16 w3-right">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-16 w3-right">Link 3</a>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+  <form class="w3-bar-item" action="." method="get">
+  	<input type="text" placeholder="Search.." class="w3-input w3-bar-item">
+  	<button class="w3-button w3-green w3-bar-item" type="submit">Go</button>
+  </form>
+</div>
+
+<div id="demo" class="w3-bar-block w3-teal w3-hide w3-hide-large w3-hide-medium">
+  <a href="#" class="w3-bar-item w3-button">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button">Link 3</a>
+</div>
+<script>
+function myFunction() {
+    var x = document.getElementById("demo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+</body>
+</html>

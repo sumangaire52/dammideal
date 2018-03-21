@@ -1,0 +1,21 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div id="mainBody" style="min-height: 750px">
+	<div class="container">
+	<div class="row-fluid">
+	   <div class="span9">
+	   <h3>Use the form below to login</h3>
+	   <div class="span6">
+		    <form class="well form-inline" action="{% url 'shop:login'%}" method="post">
+		    	{% csrf_token %}
+		    	{{form.as_p}}
+		    	<input type="hidden" name="next" value="{{ next }}" />
+		       <button type="submit" class="btn">Login</button>
+		    </form>
+	   </div>
+	   </div>
+	</div>
+	</div>
+</div>
+{% endblock %}

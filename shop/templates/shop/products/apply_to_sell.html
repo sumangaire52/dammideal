@@ -1,0 +1,130 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+		<div class="span9">
+		  <div class="well">
+		  <h4>Please fill the form below to apply for selling on our website:</h4>
+		  	<span>Before filling this form make sure you have read <a href="{% url 'shop:tac' %}" style="color: blue">terms and conditions</a></span><br><br>
+			<form class="form-horizontal" method="post" action="{% url 'shop:apply_to_sell' %}">
+				{% csrf_token %}
+				<div class="control-group">
+				<div class="controls">
+					<label class="control-label">Name of shop<sup>*</sup></label>
+					<div class="controls">
+						{{form.name_of_shop}}
+					</div>
+				</div>
+				</div>
+				<div class="control-group">
+				<div class="controls">
+					<label class="control-label">Type of shop<sup>*</sup></label>
+					<div class="controls">
+						{{form.type_of_shop}}
+					</div>
+				</div>
+				</div>
+				<div class="control-group">
+				<div class="controls">
+					<label class="control-label">Location of shop<sup>*</sup></label>
+					<div class="controls">
+						{{form.location_of_shop}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">City<sup>*</sup></label>
+					<div class="controls">
+						{{form.city}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">Contact no.<sup>*</sup></label>
+					<div class="controls">
+						{{form.contact_no}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">First name of owner<sup>*</sup></label>
+					<div class="controls">
+						{{form.first_name_of_owner}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">Last name of owner<sup>*</sup></label>
+					<div class="controls">
+						{{form.last_name_of_owner}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">Contact no. of owner<sup>*</sup></label>
+					<div class="controls">
+						{{form.contact_no_of_owner}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">% of share you are willing to give us per sell<sup>*</sup></label>
+					<div class="controls">
+						{{form.percent_of_share_willing_to_give}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">Do you want to deliver orders by yourself?<sup>*</sup></label>
+					<div class="controls">
+						{{form.delivery_by_self}} <span> If you choose 'Yes' you will have to handle delivery yourself.</span>
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">Can you make brand image for your shop?</label>
+					<div class="controls">
+						{{form.can_make_brand_image_for_shop}} <span> We will use this image to advertise you to our customers.</span>
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">Feel free to ask questions regarding selling on our website</label>
+					<div class="controls">
+						{{form.question}}
+					</div>
+				</div>
+			    </div>
+			    <div class="control-group">
+				<div class="controls">
+					<label class="control-label">By submitting this form you accept our <a href="{% url 'shop:tac' %}" style="color: blue">terms and conditions</a><sup>*</sup></label>
+					<div class="controls">
+						{{form.accepts_tac}}
+					</div>
+				</div>
+			    </div>
+			    <p><sup>*</sup> Required field</p>
+			    <div class="control-group">
+				<div class="controls">
+					<div class="controls">
+						<input class="btn btn-primary btn-success" type="submit" value="Apply" />
+					</div>
+				</div>
+			    </div>
+			</form>
+		  </div>
+		</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

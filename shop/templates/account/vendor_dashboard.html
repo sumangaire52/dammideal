@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="/">Home</a> <span class="divider">/</span></li>
+		<li class="active">Products</li>
+    </ul>
+	<h3>Products by {{request.user.username}}<small class="pull-right">{{request.user.products.all|length}} product{{request.user.products.all|length|pluralize}} available</small></h3>
+	<hr class="soft"/>
+<br class="clr"/>
+<div class="tab-content">
+	<div class="tab-pane  active" id="blockView">
+		<ul class="thumbnails">
+			{% for product in request.user.products.all %}
+			<li class="span3">
+			  <div class="thumbnail">
+				<a href="{{product.get_absolute_url}}">
+					{% thumbnail product.image1 '300x100' as im%}
+					<img src="{{im.url}}" alt="{{product.name}}"/>
+					{% endthumbnail %}
+				</a>
+				<div class="caption">
+				  <h5>{{product.name}}</h5>
+				   <h4 style="text-align:center"><a class="btn btn-primary" href="{{product.get_absolute_url}}">Rs. {{product.price}}</a></h4>
+				</div>
+			  </div>
+			</li>
+			{% empty %}
+			<big>There are no products yet.</big>
+			{% endfor %}
+		  </ul>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

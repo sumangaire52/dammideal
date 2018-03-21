@@ -1,0 +1,34 @@
+{% load cache %}
+{% cache 3000 carousal_cache %}
+<div id="carouselBlk">
+	<div id="myCarousel" class="carousel slide">
+		<div class="carousel-inner">
+		  {% for p in carousal_products %}
+		  {% if forloop.first %}
+		   <div class="item active">
+		   <div class="container">
+			<a href="register.html"><img src="{{p.image1.url}}" alt=""/></a>
+			<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>{{p.description}}</p>
+				</div>
+		  </div>
+		  </div>
+		  {% else %}
+		  <div class="item">
+		   <div class="container">
+			<a href="register.html"><img src="{{p.image1.url}}" alt=""/></a>
+			<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>{{p.description}}</p>
+				</div>
+		  </div>
+		  </div>
+		  {% endif %}
+		  {% endfor %}
+		</div>
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	  </div> 
+</div>
+{% endcache %}

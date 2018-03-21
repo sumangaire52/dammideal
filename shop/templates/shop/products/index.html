@@ -1,0 +1,129 @@
+{% extends 'shop/base.html' %}
+{% load shop_tags %}
+{% load static %}
+{% load cache %}
+
+
+{% cache 3000 index_carousal_cache %}
+
+{% block carousal %}
+{% include 'shop/top_carousal.html' %}
+{% endblock %}
+
+{% endcache %}
+
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+		<!--sidebar=============================-->
+		{% include 'shop/sidebar.html' %}
+		<!--sidebar end==========================-->
+		<!--Featured products -->
+		{% cache 300 index_cache%}
+		<div class="span9">		
+			<div class="well well-small">
+			<h4>Featured Products <small class="pull-right"><a href="{% url 'shop:products' %}">View all products</a></small></h4>
+			<div class="row-fluid">
+			<div id="featured" class="carousel slide">
+			<div class="carousel-inner">
+			  <div class="item active">
+			  <ul class="thumbnails">
+				  {% retrieve_featured_products 0 4 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+				  {% retrieve_featured_products 4 8 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+			  	{% retrieve_featured_products 8 12 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+			  	{% retrieve_featured_products 12 16 %}
+			  </ul>
+			  </div>
+			  </div>
+			  <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
+			  <a class="right carousel-control" href="#featured" data-slide="next">›</a>
+			  </div>
+			  </div>
+		     </div>
+		  <!-- Featured products end -->
+		<!-- Latest products -->
+		<div class="well well-small">
+			<h4>Latest Products<small class="pull-right"><a href="{% url 'shop:products' %}">View all products</a></small></h4>
+			<div class="row-fluid">
+			<div id="latest" class="carousel slide">
+			<div class="carousel-inner">
+			  <div class="item active">
+			  <ul class="thumbnails">
+				  {% retrieve_latest_products 0 4 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+				  {% retrieve_latest_products 4 8 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+			  	{% retrieve_latest_products 8 12 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+			  	{% retrieve_latest_products 12 16 %}
+			  </ul>
+			  </div>
+			  </div>
+			  <a class="left carousel-control" href="#latest" data-slide="prev">‹</a>
+			  <a class="right carousel-control" href="#latest" data-slide="next">›</a>
+			  </div>
+			  </div>
+		</div>
+		<!-- Latest products end  -->
+		<!-- Best selling products -->
+		<div class="well well-small">
+			<h4>Best selling products<small class="pull-right"><a href="{% url 'shop:products' %}">View all products</a></small></h4>
+			<div class="row-fluid">
+			<div id="bestselling" class="carousel slide">
+			<div class="carousel-inner">
+			  <div class="item active">
+			  <ul class="thumbnails">
+				  {% retrieve_best_selling_products 0 4 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+				  {% retrieve_best_selling_products 4 8 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+			  	{% retrieve_best_selling_products 8 12 %}
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+			  	{% retrieve_best_selling_products 12 16 %}
+			  </ul>
+			  </div>
+			  </div>
+			  <a class="left carousel-control" href="#bestselling" data-slide="prev">‹</a>
+			  <a class="right carousel-control" href="#bestselling" data-slide="next">›</a>
+			  </div>
+			  </div>
+		</div>
+		<!-- Best selling  products end -->
+		
+		</div>
+		</div>
+	</div>
+</div>
+{% endcache %}
+{% endblock %}

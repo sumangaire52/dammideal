@@ -1,0 +1,85 @@
+{% extends 'shop/base.html' %}
+{% block title %}FAQ{% endblock %}
+{% block content %}
+<div id="mainBody">
+<div class="container">
+<h1>FAQ</h1>
+<hr class="soften"/>	
+<div class="accordion" id="accordion2">
+	<div class="accordion-group">
+	  <div class="accordion-heading">
+		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+			How do I order a product?
+		</a></h4>
+	  </div>
+	  <div id="collapseOne" class="accordion-body collapse"  >
+		<div class="accordion-inner">
+			<p>Ordering a product is easy. Just click on the product you are interested in and you will see a page showing detail of that product. In the same page you will see a button saying Add to cart. Click on that button and you will see a page showing detail of your cart and a Order button. Click on that button and provide your information.</p>
+		</div>
+	  </div>
+	</div>
+	<div class="accordion-group">
+	  <div class="accordion-heading">
+		<h4><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+		  Why do I need to verify my phonenumber?
+		</a></h4>
+	  </div>
+	  <div id="collapseTwo" class="accordion-body collapse"  >
+		<div class="accordion-inner">
+			We need to verify the phonenumber to prevent fake orders by making sure that the person ordering the product is owner of that phonenumber. 
+		</div>
+	  </div>
+	</div>
+	<div class="accordion-group" id="delivery">
+	  <div class="accordion-heading">
+		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+		  When will I receive the products I ordered?
+		</a></h4>
+	  </div>
+	  <div id="collapseThree" class="accordion-body collapse"  >
+		<div class="accordion-inner">
+			Typically, you should receive your products within 48 hours but this can vary due to strikes and traffic jam.
+		</div>
+	  </div>
+	</div>
+	<div class="accordion-group">
+	  <div class="accordion-heading">
+		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+		  I missed my delivery what do I do now?
+		</a></h4>
+	  </div>
+	  <div id="collapseFour" class="accordion-body collapse"  >
+		<div class="accordion-inner">
+			No need to worry. You can always contact us and ask us to deliver your product again.
+		</div>
+	  </div>
+	</div>
+	<div class="accordion-group">
+	  <div class="accordion-heading">
+		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+		  Why do I need to pay the delivery charge?
+		</a></h4>
+	  </div>
+	  <div id="collapseFive" class="accordion-body collapse"  >
+		<div class="accordion-inner">
+			When you order something we need to visit the vendor of that product first and then deliver it to you. This process can be expensive so you need to pay the delivery charge yourself.
+		</div>
+	  </div>
+	</div>
+	
+	<div class="accordion-group">
+	  <div class="accordion-heading">
+		<h4><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
+		  I am a vendor. How can I sell with you?
+		</a></h4>
+	  </div>
+	  <div id="collapseSix" class="accordion-body collapse"  >
+		<div class="accordion-inner">
+			In order to sell with us you need to fill <a href="{% url 'shop:apply_to_sell' %}" style="color: blue">this form</a> first. Once we received your application we will review it and may contact you for further information. If your application is accepted we will contact you.
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+</div>
+{% endblock %}

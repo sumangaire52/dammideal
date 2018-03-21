@@ -1,0 +1,15 @@
+{% load thumbnail %}
+{% for product in latest_products %}
+<li class="span3">
+<div class="thumbnail" style="width:100%;">
+<a href="{{product.get_absolute_url}}#pro">
+	{% thumbnail product.image1 'x150' as im%}
+	<img src="{{im.url}}" alt="{{product.name}}">
+	{% endthumbnail %}
+     <div class="caption">
+		<p style="color: black;"><big>{{product.name}}</big><br><small>Rs.{{product.price}}</small><br>{% if product.discount_price %}<small style="color: rgba(200,50,0,0.9);">Rs. {{product.discount_price}} off</small>{% endif %}</p>
+     </div>
+</a>
+</div>
+</li>
+{% endfor %}

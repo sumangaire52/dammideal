@@ -1,0 +1,65 @@
+{% extends 'shop/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+	{% include 'shop/sidebar.html' %}
+<!-- Sidebar end=============================================== -->
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="/">Home</a> <span class="divider">/</span></li>
+		<li class="active">Search</li>
+    </ul>
+	<h4>Search result for "{{search_query}}"<small class="pull-right">{{total_results}} result{{total_results|pluralize}} found</small></h4>
+	<hr class="soft"/>
+<br class="clr"/>
+<div class="tab-content">
+	<div class="tab-pane  active" id="blockView">
+		<ul class="thumbnails">
+			{% for result in results %}
+			{% with product=result.object %}
+			<li class="span3">
+			  <div class="thumbnail">
+				<a href="{{product.get_absolute_url}}">
+					{% thumbnail product.image1 '300x100' as im%}
+					<img src="{{im.url}}" alt="{{product.name}}"/>
+					{% endthumbnail %}
+				</a>
+				<div class="caption">
+				  <h5>{{product.name}}</h5>
+				   <h4 style="text-align:center"><a class="btn" href="{{product.get_absolute_url}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{product.get_absolute_url}}">Add to <i class="icon-shopping-cart"></i></a> <br><a class="btn btn-primary" href="#">Rs. {{product.price}}</a></h4>
+				</div>
+			  </div>
+			</li>
+			{% endwith %}
+			{% endfor %}
+		  </ul>
+	<hr class="soft"/>
+	</div>
+</div>
+	<div class="pagination" style="margin-left: 35%;">
+			<ul ma>
+			<li>
+				{% if results.has_previous  %}
+				<a href="?query={{search_query}}&page={{results.previous_page_number}}">Previous</a>
+				{% endif %}
+			</li>
+			<li>
+				<span>Page {{results.number}} of {{results.paginator.num_pages}}</span>
+			</li>
+			<li>
+				{% if results.has_next %}
+				<a href="?query={{search_query}}&page={{results.next_page_number}}">Next</a>
+				{% endif %}
+			</li>
+			</ul>
+	</div>
+			<br class="clr"/>
+
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

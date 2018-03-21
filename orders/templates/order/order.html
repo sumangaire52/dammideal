@@ -1,0 +1,59 @@
+{% extends 'shop/base.html' %}
+
+
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+	{% include 'shop/sidebar.html' %}
+<!-- Sidebar end=============================================== -->
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="/">Home</a> <span class="divider">/</span></li>
+		<li class="active">Order/ Create</li>
+    </ul>
+	<h3>Order Items</h3>	
+	<hr class="soft"/>
+	
+	<div class="row">
+		<div class="span4">
+			<div class="well">
+			{% if cart|length > 0 %}
+			<strong>Please provide your information:</strong><br/><br/><br/>
+			<form action="." method="post">
+				{% csrf_token %}
+			  <div class="control-group">
+				<div class="controls">
+				  {{form}}
+				</div>
+			  </div>
+			  <div class="controls">
+			  <button type="submit" class="btn btn-primary">Order Now</button>
+			  </div>
+			</form>
+			{% else %}
+			<strong>Add products to the cart first.</strong>
+			{% endif %}
+		</div>
+		</div>
+		<div class="span1"> &nbsp;</div>
+		<div class="span4">
+			<div class="well" style="background-color: rgba(150,150,0,0.3);">
+			<h4>Your Order Summary:</h4>
+			<ul>
+			{% for item in cart %}
+			<li><strong>{{item.product.name}}</strong> : {{item.quantity}} x Rs. {{item.price}} = Rs. {{item.total_price}}</li>
+			{% endfor %}
+			<li><strong>Delivery charge</strong> : Rs. {{delivery_charge}}</li>
+			</ul>
+			<h5>Total: Rs. {{total_price}}</h5>
+		</div>
+		</div>
+	</div>	
+	
+</div>
+</div></div>
+</div>
+<!-- MainBody End ============================= -->
+{% endblock %}

@@ -1,0 +1,4 @@
+{{object.name}}
+{{object.tags.all|join:", "}}
+{{object.manufactured_by}}
+{{object.seller}}

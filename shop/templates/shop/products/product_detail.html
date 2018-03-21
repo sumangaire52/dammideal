@@ -1,0 +1,167 @@
+{% extends 'shop/base.html' %}
+{% load thumbnail %}
+{% block title %} {{product.name}} {% endblock %}
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+	{% include 'shop/sidebar.html' %}
+<!-- Sidebar end=============================================== -->
+	<div class="span9" id="pro">
+    <ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li><a href="{% url 'shop:products' %}">Products</a> <span class="divider">/</span></li>
+    <li class="active">Product details</li>
+    </ul>	
+	<div class="row">	  
+			<div id="gallery" class="span3">
+				{% thumbnail product.image1 '720x720' as im %}
+            <a href="{{im.url}}" title="{{product.name}}">
+				<img src="{{product.image1.url}}" style="width:100%" alt="{{product.name}}"/>
+            </a>
+            {% endthumbnail %}
+			<div id="differentview" class="moreOptopm carousel slide">
+                <div class="carousel-inner">
+                  <div class="item active">
+                  	{% thumbnail product.image1 '720x720' as im %}
+                   <a href="{{im.url}}"> <img style="width:29%" src="{{product.image1.url}}" alt="{{product.name}}"/></a>
+                   {% endthumbnail %}
+                   {% if product.image2 %}
+                   <a href="{{product.image2.url}}"> <img style="width:29%" src="{{product.image2.url}}" alt="{{product.name}}"/></a>
+                   {% endif %}
+                   {% if product.image3 %}
+                   <a href="{{product.image3.url}}" > <img style="width:29%" src="{{product.image3.url}}" alt="{{product.name}}"/></a>
+                   {% endif %}
+                   {% if product.image4 %}
+                   <a href="{{product.image4.url}}" > <img style="width:29%" src="{{product.image4.url}}" alt="{{product.name}}"/></a>
+                   {% endif %}
+                  </div>
+                  <div class="item">
+                   {% if product.image4 %}
+                   <a href="{{product.image4.url}}" > <img style="width:29%" src="{{product.image4.url}}" alt=""/></a>
+                   {% endif %}
+                   {% if product.image3 %}
+                   <a href="{{product.image3.url}}"> <img style="width:29%" src="{{product.image3.url}}" alt=""/></a>
+                   {% endif %}
+                   {% if product.image2 %}
+                   <a href="{{product.image2.url}}"> <img style="width:29%" src="{{product.image2.url}}" alt=""/></a>
+                   {% endif %}
+                   <a href="{{product.image1.url}}"> <img style="width:29%" src="{{product.image1.url}}" alt=""/></a>
+                  </div>
+                </div> 
+              </div>
+			</div>
+			<div class="span6" id="product">
+				<h3>{{product.name}}</h3>
+				<small>{{product.short_description}}</small>
+				<hr class="soft"/>
+				<form class="form-horizontal qtyFrm" action="{%url 'cart:add_to_cart' product.id %}" method="post">
+				{% csrf_token %}
+				  <div class="control-group">
+					<label class="control-label"><span>Rs.{{product.price}}</span>
+						{% if product.discount_price %}
+						<br><small style="color:rgb(75,5,25);">You save Rs.{{product.discount_price}}</small>
+						{% endif %}
+					</label>
+					<div class="controls">
+						{% if error_message %}
+						<small style="color: red">{{error_message}}</small>
+						{% endif %}
+					 <strong>Quantity: </strong> {{form.quantity}}
+					 {% if product.available_colors.all %}
+					 <br>
+					 <br>
+					 <strong>Color: </strong>
+					 <select name='color' required="True" class="span1">
+					 {% for color in product.available_colors.all %}
+					 <option value="{{color.name}}">{{color.name}}</option>
+					 {% endfor %}
+					</select>
+					 {% endif %}
+					 {% if product.size.all %}
+					 <br>
+					 <br>
+					 <strong>Size: </strong>
+					 <select name='size' required="True" class="span1">
+					 {% for size in product.size.all %}
+					 <option value="{{size.size}}">{{size.size}}</option>
+					 {% endfor %}
+					</select>
+					 {% endif %}
+					  <button type="submit" class="btn btn-medium btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+					</div>
+				  </div>
+				</form>
+				<hr class="soft"/>
+				<h4>{{product.stock}} item{{product.stock|pluralize}} in stock.</h4>
+				{% if product.available_colors.all %}
+				<hr class="soft clr"/>
+				{% endif %}
+				<p>
+				{{product.description|safe|truncatewords:35|linebreaks}}
+				</p>
+				<div class="btn-toolbar">
+			  <div class="btn-group" id="like">
+				<a href="{% url 'shop:like' product.id product.slug %}#product"><span class="btn" ><i class=" icon-thumbs-up"></i>{{product.likes}}</span></a>
+				<a href="{% url 'shop:dislike' product.id product.slug %}#product"><span class="btn" ><i class="icon-thumbs-down"></i>{{product.dislikes}}</span></a>
+			  </div>
+			</div>
+			    <a class="btn btn-small pull-right" href="#detail">More Details</a>
+				<br class="clr"/>
+			<a href="#" name="detail"></a>
+			<hr class="soft"/>
+			</div>
+			
+			<div class="span9">
+            <ul id="productDetail" class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
+              <li><a href="#profile" data-toggle="tab">Related Products</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="home">
+			  <h4>Product Information</h4>
+			  <p>{{product.description|safe|linebreaks}}</p>
+			    {% if product.features %}			
+				<h5>Features</h5>
+				<p>
+					{{product.features|linebreaks}}
+				</p>
+				{% endif %}
+              </div>
+		<div class="tab-pane fade" id="profile">
+		<div class="tab-content">
+			<div class="tab-pane active" id="blockView">
+				<ul class="thumbnails">
+					{% for product in similar_products %}
+					<li class="span3">
+					  <div class="thumbnail">
+						<a href="{{product.get_absolute_url}}">
+							{% thumbnail  product.image1 '400x200' as im %}
+							<img src="{{im.url}}" alt=""/>
+							{% endthumbnail %}
+						</a>
+						<div class="caption">
+						  <h5>{{product.name}}</h5>
+						  <p> 
+							{{produuct.short_description}}
+						  </p>
+						  <h4 style="text-align:center"><a class="btn" href="{{product.get_absolute_url}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{product.get_absolute_url}}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{product.price}}</a></h4>
+						</div>
+					  </div>
+					</li>
+					{% endfor %}
+				  </ul>
+			<hr class="soft"/>
+			</div>
+		</div>
+				<br class="clr">
+					 </div>
+		</div>
+          </div>
+
+	</div>
+</div>
+</div> </div>
+</div>
+{% endblock %}

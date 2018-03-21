@@ -1,0 +1,99 @@
+{% extends 'shop/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+	{% include 'shop/sidebar.html' %}
+<!-- Sidebar end=============================================== -->
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="/">Home</a> <span class="divider">/</span></li>
+		<li class="active">Products</li>
+    </ul>
+	<h3>{% if subcategory %}{{subcategory.name}}{% else %}Products {% endif %}<small class="pull-right">{{object_list|length}} product{{object_list|length|pluralize}} available</small></h3>
+	<hr class="soft"/>
+	<form class="form-horizontal span6" action="." method="get" id="sort_form">
+		<div class="control-group">
+		  <label class="control-label alignL">Sort by price:</label>
+		  <select onclick="submit_form()" name="sorting">
+		  	<option value="highest-first">Highest first</option>
+		  	<option value="lowest-first">Lowest first</option>
+		  </select>
+		</div>
+	</form>
+	<form class="form-horizontal span6" action="." method="get" id="popularity-sort_form">
+		<div class="control-group">
+		  <label class="control-label alignL">Sort by popularity:</label>
+		  <select onclick="submit_form1()" name="popularity-sorting">
+		  	<option value="best-selling-first">Best selling first</option>
+		  	<option value="most-liked-first">Most liked first</option>
+		  </select>
+		</div>
+	</form>
+<br class="clr"/>
+<div class="tab-content">
+	<div class="tab-pane  active" id="blockView">
+		<ul class="thumbnails">
+			{% for product in products %}
+			<li class="span3">
+			  <div class="thumbnail">
+				<a href="{{product.get_absolute_url}}">
+					{% thumbnail product.image1 '300x100' as im%}
+					<img src="{{im.url}}" alt="{{product.name}}"/>
+					{% endthumbnail %}
+				</a>
+				<div class="caption">
+				  <h5>{{product.name}}</h5>
+				   <h4 style="text-align:center"><a class="btn btn-primary" href="{{product.get_absolute_url}}">Rs. {{product.price}}</a></h4>
+				</div>
+			  </div>
+			</li>
+			{% endfor %}
+		  </ul>
+	<hr class="soft"/>
+	</div>
+</div>
+	<div class="pagination" style="margin-left: 35%">
+			<ul>
+			<li>
+				{% if products.has_previous  %}
+				{% if sorting %}
+				<a href="?sorting={{sorting}}&page={{products.previous_page_number}}">Previous</a>
+				{% elif popularity_sorting %}
+				<a href="?popularity-sorting={{popularity_sorting}}&page={{products.previous_page_number}}">Previous</a>
+				{% else %}
+				<a href="?page={{products.previous_page_number}}">Previous</a>
+				{% endif %}
+				{% endif %}
+			</li>
+			<li><span>Page {{products.number}} of {{products.paginator.num_pages}}</span></li>
+			<li>
+				{% if products.has_next %}
+				{% if sorting %}
+				<a href="?sorting={{sorting}}&page={{products.next_page_number}}">Next</a>
+				{% elif popularity_sorting %}
+				<a href="?popularity-sorting={{popularity_sorting}}&page={{products.next_page_number}}">Next</a>
+				{% else %}
+				<a href="?page={{products.next_page_number}}">Next</a>
+				{% endif %}
+				{% endif %}
+			</li>
+			</ul>
+			</div>
+			<br class="clr"/>
+</div>
+</div>
+</div>
+</div>
+<!-- MainBody End ============================= -->
+<script type="text/javascript">
+	function submit_form() {
+		document.forms["sort_form"].submit();
+	}
+	function submit_form1() {
+		document.forms["popularity-sort_form"].submit();
+	}
+</script>
+{% endblock %}
