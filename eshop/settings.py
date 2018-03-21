@@ -30,7 +30,7 @@ SECRET_KEY = 'jdrf-kfb0l*9+fur84!ctvf2ft*=(v5liy@pm8tl38l!_11m%z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['dammideal.com','www.dammideal.com']
+ALLOWED_HOSTS = ['dammideal.herokuapp.com','127.0.0.1']
 
 
 # Application definition
